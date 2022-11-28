@@ -1,0 +1,43 @@
+pipeline {
+agent any
+satages {
+satge ('one') {
+steps {
+echo 'hi! this is harikrishna'
+}
+}satage('two') {
+input ('do yiu want to proceed')
+}
+}
+stage ('three')
+when {
+not {
+branch "main"
+}
+}
+steps {
+echo "hello"
+}
+}
+satage ('four') {
+parallel {
+satge ('unit testing')
+steps {
+echo "running the unit test---"
+}
+}
+stage ('integration test')
+agent {
+docker {
+reusenode false
+'image ubuntu'
+}
+}
+step {
+echo "running the integration test---"
+}
+}
+}
+}
+}
+}
